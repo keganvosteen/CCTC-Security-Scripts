@@ -1,0 +1,4 @@
+Host Interrogation
+Echo “” | nc -v 10.50.30.41 80
+nmap -sV 10.50.30.41 -p 80
+nikto -h 10.50.30.41 80

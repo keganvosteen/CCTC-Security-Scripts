@@ -1,0 +1,46 @@
+Linux Commands and Notes:
+
+Cat /etc/sudoers >> must edit with visudo
+
+Sudo-l exploit:
+
+cat /var/log/syslog (permission denied)
+sudo cat /var/log/shadow (permission denied)
+sudo cat /var/log/syslog /etc/shadow
+
+SUID/GUID
+
+
+SUID files: find / -type f -perm /4000 -ls 2>/dev/null
+GUID files: find / -type f -perm /2000 -ls 2>/dev/null
+Both: find / -type f -perm /6000 -ls 2>/dev/null
+
+Be sure to check for a “dot” in the PATH
+If there is one can you create your own script (sharing a name of another one) to exploit something?
+
+CRON:
+
+/var/spool/cron/crontabs
+/etc/crontab
+
+World Writeables:
+
+Other bit is set to +X, which allows anyone to write to it.
+
+find / -type f -perm /2 -o -type d -perm /2 2>/dev/null
+find / -type f -writable -o -type d -writable 2>/dev/null
+Best one: find / -type d -perm /2 2>/dev/null
+
+Logs systemd
+
+Look in /var/log:
+
+Logs typically housed in /var/log, some useful logs:
+
+lastlog --- each users successful login time
+btmp --- tracks bad login attempts
+secure --- Syslog
+sulog --- use of su command
+utmp --- users currently on (w)
+wtmp --- permanent record on user on/off
+auth.log/secure --- tracks usage of authorization

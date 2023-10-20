@@ -1,0 +1,13 @@
+Host Enumeration - Find ports for each host that are online
+nmap -sS -Pn 10.50.30.41 -p 135-139,22,80,443,21,8080
+	-Pn is required because proxychains does not allow ICMP traffic
+	-sS is the default if run as root, if you are not root you need sudo privs to run -sS. It sends SYN but does not respond to SYN/ACK
+
+nmap -sT -Pn 10.100.28.40 -p 135-139,22,80,443,21,8080
+
+nc -nvzw1 10.50.30.41 20-25 2>&1 | grep succeeded!
+	-z: only scan for open portsproxy
+	-v: verbose
+	-n: no DNS lookup, don't care about hostnames
+	-w: “n” seconds timeout
+	2>&1: a standard error redirect
